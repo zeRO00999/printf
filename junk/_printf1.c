@@ -1,13 +1,15 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stdio.h>
 
-call_t container[] = {
-    {'c', parse_char}, {'s', parse_str}, {'i', parse_int}, {'d', parse_int},
-    {'%', parse_perc}, {'b', parse_bin}, {'o', parse_oct}, {'x', parse_hex},
-    {'X', parse_X}, {'u', parse_uint}, {'r', parse_rev},
-    {'\0', NULL}
-};
-
-int _printf(const char *format, ...) {
+/**
+ * _printf - formatted output conversion and print data.
+ * @format: input string.
+ *
+ * Return: number of characters printed.
+ */
+int _printf(const char *format, ...)
+{
     va_list arg;
     char buffer[2000];
     int i = 0, buff_count = 0;
@@ -19,13 +21,13 @@ int _printf(const char *format, ...) {
 
     while (format[i])
     {
-        int j;
+        int j; 
 
         if (format[i] == '%')
         {
-            i++;
+            i++; 
             if (format[i] == '\0')
-                break;
+                break; 
 
             for (j = 0; container[j].t != '\0'; j++)
             {

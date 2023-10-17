@@ -7,13 +7,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
+
+/**
+ * struct call - struct call
+ * @t: t - flag for data type
+ * @f: function - assocated function
+ *
+ */
 typedef struct call
 {
-    char t;
-    int (*f)(char *, va_list, int);
+	char t;
+	int (*f)(char *, va_list, int);
 } call_t;
-
-extern call_t container[];
 
 int _printf(const char *format, ...);
 int buff_append(char *buff_dest, va_list arg, int buff_count, char type);
@@ -32,4 +37,10 @@ int parse_uint(char *buff_dest, va_list arg, int buff_count);
 int parse_rev(char *buff_dest, va_list arg, int buff_count);
 int parse_R13(char *buff_dest, va_list arg, int buff_count);
 
+call_t container[] = {
+    {'c', parse_char}, {'s', parse_str}, {'i', parse_int}, {'d', parse_int},
+    {'%', parse_perc}, {'b', parse_bin}, {'o', parse_oct}, {'x', parse_hex},
+    {'X', parse_X}, {'u', parse_uint}, {'r', parse_rev},
+    {'\0', NULL}
+};
 #endif
